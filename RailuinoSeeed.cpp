@@ -509,3 +509,27 @@ boolean TrackController::getVersion(byte *high, byte *low) {
     
     return result;
 }
+
+boolean TrackController::getSystemStatus(uint32_t uid, byte channel, word *status) {
+	TrackMessage message;
+	
+	message.clear();
+	message.command = 0x00;
+	message.length = 0x06;
+	message.data[0] = uid >> 24;
+	message.data[1] = uid >> 16;
+	message.data[2] = uid >> 8;
+	message.data[3] = uid;
+	message.data[4] = 0x0b; // Status
+	message.data[5] = channel;
+	
+	if (!exchangeMessage(message, message, 1000))
+		return false;
+	
+	if (message.length != 8)
+		return false;
+	
+	*status = word(message.data[6], message.data[7]);
+	
+	return true;
+}

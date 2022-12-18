@@ -346,6 +346,13 @@ public:
      * Queries the software version of the track format processor.
      */
     boolean getVersion(byte *high, byte *low); 
+  
+    /**
+     * Queries the system status of the track format processor ("Gleis Format 
+     * Prozessor") with the id "uid" for the given channel. The uid 0 can be used 
+     * if only one track format processor is connected.
+     */
+    boolean getSystemStatus(uint32_t uid, byte channel, word *status);
 
 
 private:
