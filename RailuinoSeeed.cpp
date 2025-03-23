@@ -154,7 +154,8 @@ boolean TrackController::receiveMessage(TrackMessage &message)
 {
     unsigned long t = millis();
 
-    while (CAN_MSGAVAIL != mCAN->checkReceive()) {
+    if (CAN_MSGAVAIL != mCAN->checkReceive()) {
+		return false;
     }
 
     uint32_t id;
