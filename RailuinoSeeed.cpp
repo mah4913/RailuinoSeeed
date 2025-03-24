@@ -255,6 +255,17 @@ boolean TrackController::setPower(boolean power) {
 	return exchangeMessage(message, message, 1000);
 }
 
+boolean TrackController::setPower2(boolean power) {
+	TrackMessage message;
+
+	message.clear();
+	message.command = 0x00;
+	message.length = 0x05;
+	message.data[4] = power ? 0x01 : 0x00;
+
+	return sendMessage(message);
+}
+
 boolean TrackController::setLocoDirection(word address, byte direction) {
 	TrackMessage message;
 
@@ -375,6 +386,24 @@ boolean TrackController::setAccessory(word address, byte position, byte power,
 		exchangeMessage(message, message, 1000);
 	}
 	
+	return true;
+}
+
+
+boolean TrackController::setAccessory2(word address, byte position, byte power,
+		word time) {
+	TrackMessage message;
+
+	message.clear();
+	message.command = 0x0b;
+	message.length = 0x06;
+	message.data[2] = highByte(address);
+	message.data[3] = lowByte(address);
+	message.data[4] = position;
+	message.data[5] = power;
+
+	sendMessage(message);
+
 	return true;
 }
 

@@ -217,6 +217,7 @@ public:
      * reflects whether the call was successful.
      */
     boolean setPower(boolean power);
+    boolean setPower2(boolean power);
     
     /**
      * Sets the direction of the given locomotive. Valid directions
@@ -281,6 +282,8 @@ public:
      * whether the call was successful.
      */
     boolean setAccessory(word address, byte position, byte power, word time);
+
+    boolean setAccessory2(word address, byte position, byte power, word time);
     
     /**
      * Switches a turnout. This is actually a convenience function
