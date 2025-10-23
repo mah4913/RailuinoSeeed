@@ -300,6 +300,25 @@ boolean TrackController::setPower2(boolean power)
 	return sendMessage(message);
 }
 
+boolean TrackController::getPower(boolean *power)
+{
+	TrackMessage message;
+
+	message.clear();
+	message.command = 0x00;
+	message.length = 0x04;
+
+	if (exchangeMessage(message, message, 1000))
+	{
+		*power = message.data[4];
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 boolean TrackController::getPower2(void)
 {
 	TrackMessage message;

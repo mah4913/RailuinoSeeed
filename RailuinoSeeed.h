@@ -219,6 +219,8 @@ public:
    */
   boolean setPower(boolean power);
   boolean setPower2(boolean power);
+
+  boolean getPower(boolean *power);
   boolean getPower2(void);
 
   /**
